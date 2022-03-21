@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index',
   mode: 'development',
   devtool: 'source-map',
   optimization: {
@@ -20,16 +20,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader',
-          options: {
-            // disable type checker - we will use it in fork plugin
-            transpileOnly: true
-          }
-        }
-      },
+        use: ["babel-loader"],
+    },
+    {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["ts-loader"],
+    },
+    {
+        test: /\.(css|scss)$/,
+        use: ["style-loader", "css-loader"],
+    },
+    {
+        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+        use: ["file-loader"],
+    },
       {
         test: /\.(scss|css)$/,
         use: [

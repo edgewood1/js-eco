@@ -8,7 +8,21 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "allowJs": true,
+      "skipLibCheck": true,
+      "types": []
+    
   },
-  "exclude": ["spec"]
+ 
+  "exclude": ["spec",
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "../../node_modules/@types/node/index.d.ts",
+  "../node_modules/*"], 
+  "include": [
+    "src/**/*"
+  ]
 }
