@@ -30,16 +30,16 @@ const StyledTextfield = styled(TextField)`
  * @identifier {boolean} alert - helps define alert lifecycle
  */
 export default function FooterRow() {
-  const [total, data, changeData, changeTotal] = React.useContext(Context);
+  const appContext = React.useContext(Context);
   const [alert, setAlert] = React.useState(false)
  
   const clear = () => {
-    const clearedData = data.map((e: AppData) => {
+    const clearedData = appContext?.data.map((e: AppData) => {
       return { id: e.id, value: 0, name: e.name };
     });
     resetTotal();
-    changeData(clearedData);
-    changeTotal(0);
+    appContext?.changeData(clearedData);
+    appContext?.changeTotal(0);
   };
  
   const onSubmit = () => {  
@@ -47,9 +47,11 @@ export default function FooterRow() {
   }
 
   const checkDisabled = () => {
-    if (total < 100 && alert) setAlert(false)
-    return total < 100 || alert 
-
+    if (appContext) {
+      if (appContext?.total < 100 && alert) setAlert(false)
+      return appContext?.total < 100 || alert 
+    }
+    return false;
   }
   return (
     <BottomRow>
@@ -61,7 +63,7 @@ export default function FooterRow() {
           Reset 
         </Button>
       </div>
-      {(total === 100) ? 
+      {(appContext?.total === 100) ? 
         <Alert>
           {!alert ? 'You may submit' : 'You\'ve submitted'}
         </Alert>: <></>}
@@ -70,7 +72,7 @@ export default function FooterRow() {
         InputProps={{
           readOnly: true,
         }}
-        value={total} />
+        value={appContext?.total} />
     </BottomRow> 
   );
 }

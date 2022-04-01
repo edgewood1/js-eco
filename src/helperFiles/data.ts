@@ -1,4 +1,10 @@
-const data2 = [
+interface Data {
+  id:string,
+  name: string,
+  value: number
+}
+
+const data2: Data[] = [
   {
     id: '0',
     name: 'Fidelity',

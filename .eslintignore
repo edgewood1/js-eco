@@ -1,9 +1,0 @@
-node_modules
-dist
-@types
-index.d.ts
-node_modules
-**/.next/**
-**/_next/**
-**/dist/**
-../../node_modules/@types/node/assert.d.ts

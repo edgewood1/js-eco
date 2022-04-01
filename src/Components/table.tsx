@@ -24,7 +24,7 @@ const tableContainerStyle = () => ({
  */
 export default function BasicTable() {
   const resources = React.useContext(Context);
-  const [, data] = resources;
+   
   return (
     <TableContainer sx={tableContainerStyle} component={Paper}>
       <Table sx={{ minWidth: 350, maxWidth: 700 }} aria-label="simple table">
@@ -37,7 +37,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row: AppData, i: number) => (
+          {resources?.data.map((row: AppData, i: number) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

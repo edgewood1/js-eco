@@ -23,29 +23,31 @@ interface PropTypes {
  */
 function Slide(props: PropTypes) {
   const {  row  } = props;
-  const [ total, data, changeData, changeTotal ] = React.useContext(Context);
+  const appContext = React.useContext(Context);
   const [ value, setValue ] = React.useState(0);
 
   // this condition reflects a reset state
-  if (value > 0 && total === 0) {
+  if (value > 0 && appContext?.total === 0) {
     setValue(0);
   }
 
   const handleChange = ( event: Event, newVal: number ) => {
-    // Slider shouldn't move right if grand total has reached 100
-    maxVal = 100 - total + value;
+    if (appContext) {
+      // Slider shouldn't move right if grand total has reached 100
+      maxVal = 100 - appContext?.total + value;
 
-    // Only update the slider value & total value if: 
-    if ( newVal !== value && (maxVal >= newVal || newVal < value) ) {
-      setValue(newVal);
-      // Calculate the total for all 5 entities in light of new value
-      const newTotal = calculateTotal(newVal, row.id);
-      if ( newTotal <= 100 ) {
-        // calculate the new table data state
-        const newData = calculateData(data, row, newVal)
-        // change state
-        changeData(newData);
-        changeTotal(newTotal);
+      // Only update the slider value & total value if: 
+      if ( newVal !== value && (maxVal >= newVal || newVal < value) ) {
+        setValue(newVal);
+        // Calculate the total for all 5 entities in light of new value
+        const newTotal = calculateTotal(newVal, row.id);
+        if ( newTotal <= 100 ) {
+          // calculate the new table data state
+          const newData = calculateData(appContext?.data, row, newVal)
+          // change state
+          appContext?.changeData(newData);
+          appContext?.changeTotal(newTotal);
+        }
       }
     }
   };

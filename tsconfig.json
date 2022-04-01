@@ -1,28 +1,21 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "baseUrl": "./src",
-    "rootDir": "./src",
-    "allowJs": true,
-      "skipLibCheck": true,
-      "types": []
-    
+      "target": "es5",
+      "module": "commonjs",
+      "lib": [
+          "es6", "dom"
+      ],
+      "jsx": "react",
+      "declaration": true,
+      "removeComments": false,
+      "stripInternal": true,
+      "esModuleInterop": true, // fixes some issues TS originally had with the ES6 spec where TypeScript treats CommonJS/AMD/UMD modules similar to ES6 module
+      // since 2.3
+      // "strict": true,
+      "alwaysStrict": true,
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true
   },
- 
-  "exclude": ["spec",
-    "node_modules",
-    "./node_modules",
-    "./node_modules/*",
-    "../../node_modules/@types/node/index.d.ts",
-  "../node_modules/*"], 
-  "include": [
-    "src/**/*"
-  ]
+
 }
